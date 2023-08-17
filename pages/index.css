@@ -26,7 +26,7 @@ form .input-field:first-child{
     margin-bottom: 1.5rem;
 }
 
-form input[type="submit"]{
+form button[type="submit"]{
     background: linear-gradient(to left, #4776E6, #8e54e9);
     color: white;
     border-radius: 4px;

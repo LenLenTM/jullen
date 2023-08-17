@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <form action="/user" method="post">
+    <form>
         <h2>Login</h2>
         <div class="input-field">
             <input type="text" name="username" id="username" placeholder="Enter Username">
@@ -17,8 +17,10 @@
         <div class="input-field">
             <input type="password" name="password" id="password" placeholder="Enter Password">
         </div>
-        <input type="submit" value="Login">
+        <button type="submit" onclick="postUserCredentials()">Login</button>
     </form>
+
+    <button onclick="postUserCredentials()">TestHash</button>
 
     <footer>
         <p>Impressum: Lena Gross   –   lena_gross@gmx.at</p>

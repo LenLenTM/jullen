@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const nodeSession = require('express-session');
 const fs = require('fs');
 const https = require('https');
+//const bodyParser = require('body-parser');
 
 const app = express();
 const hostname = '10.10.10.100';
@@ -22,10 +23,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'pages')));
 app.use(cookieParser());
+//app.use(bodyParser.json());
 
-app.get("/", function (req, res){
-    res.sendFile(__dirname + "/pages/index.html");
-});
+const routes = require('./api/routes.js');
+app.use('/api', routes);
 
 const options = {
     key: fs.readFileSync("/home/Lena/jullen/certs/_.jullen.at_private_key.key"),
