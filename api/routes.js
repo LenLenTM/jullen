@@ -1,7 +1,8 @@
-const { Router } = require('express');
-const requestController = require('./requestController.js');
-const routes = Router();
+import express from 'express';
+import requestController from './requestController.js';
+const routes = express.Router();
+const requestControllerInstance = new requestController();
 
-routes.post('/login', requestController.login);
+routes.post('/login', requestControllerInstance.login.bind(requestController));
 
-module.exports = routes;
+export default routes;

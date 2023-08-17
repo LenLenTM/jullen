@@ -1,6 +1,6 @@
-const fetch = require('node-fetch');
-const {response} = require("express");
-const fs = require('fs');
+import fetch from 'node-fetch';
+import response from "express";
+import fs from 'fs';
 
 class Data {
 
@@ -12,4 +12,4 @@ class Data {
 
 }
 
-module.exports = new Data();
+export default Data;

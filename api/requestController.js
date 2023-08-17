@@ -1,17 +1,16 @@
-const model = require("./data.js");
-const { request } = require('express');
+import data from "./data.js";
+import request from 'express';
 
 class RequestController {
 
-    login(req, res){
+    async login(req, res){
 
         let username = req.body.user.username;
         let password = req.body.user.password;
 
         //TODO: validate user credentials
-
-        res.send(model.login(req.body));
+        res.send(data.login(req.body));
     }
 }
 
-module.exports = new RequestController();
+export default RequestController;
