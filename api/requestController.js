@@ -3,10 +3,12 @@ const { request } = require('express');
 
 class RequestController {
 
-    login(req, res){
+    async login(req, res){
 
-        let username = req.body.user.username;
-        let password = req.body.user.password;
+        let user = req.body;
+        //let password = req.body.user.password;
+
+        console.log(user.username + " | " + user.password);
 
         //TODO: validate user credentials
 
