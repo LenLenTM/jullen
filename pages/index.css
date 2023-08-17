@@ -1,0 +1,50 @@
+body {
+    display: grid;
+    justify-content: center;
+    min-height: 100%;
+    grid-template-areas:
+    "l"
+    "f";
+}
+
+form{
+    grid-area: l;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field{
+    position: relative;
+    margin-top: 2rem;
+}
+
+.input-field input{
+    padding: 0.8rem;
+}
+
+form .input-field:first-child{
+    margin-bottom: 1.5rem;
+}
+
+form input[type="submit"]{
+    background: linear-gradient(to left, #4776E6, #8e54e9);
+    color: white;
+    border-radius: 4px;
+    margin-top: 2rem;
+    padding: 0.4rem;
+}
+
+footer{
+    grid-area: f;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: black;
+}
+
+footer > p{
+    font-size: 0.7rem;
+    color: white;
+}
