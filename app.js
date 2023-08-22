@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const nodeSession = require('express-session');
+const session = require('express-session');
 const fs = require('fs');
 const https = require('https');
 const bodyParser = require('body-parser');
@@ -12,9 +12,9 @@ const PORT = 443;
 
 const oneDay = 1000 * 60 * 60 * 24;
 
-app.use(nodeSession({
+app.use(session({
     secret:"le262na18",
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {maxAge: oneDay},
     resave: false
 }));
