@@ -13,7 +13,7 @@ const PORT = 443;
 const oneDay = 1000 * 60 * 60 * 24;
 
 app.use(session({
-    secret:"le262na18",
+    secret:"le262na18", //TODO: put secret in an env file and change secret
     saveUninitialized: false,
     cookie: {maxAge: oneDay},
     resave: false
@@ -21,12 +21,14 @@ app.use(session({
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'pages')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
 const routes = require('./api/routes.js');
+const standardRoutes = require('./api/standardRoutes');
 app.use('/api', routes);
+app.use('/', standardRoutes);
 
 const options = {
     key: fs.readFileSync("/home/Lena/jullen/certs/_.jullen.at_private_key.key"),
