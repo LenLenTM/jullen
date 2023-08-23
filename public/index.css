@@ -1,16 +1,58 @@
 body {
+    background-color: #edeef0;
     display: grid;
     justify-content: center;
     min-height: 100%;
     grid-template-areas:
+    "m"
+    "hr"
     "l"
     "f";
+}
+
+.menu{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    grid-area: m;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.menu-icons{
+    width: 5%;
+    filter: invert(60%) sepia(16%) saturate(452%) hue-rotate(233deg) brightness(103%) contrast(85%);
+    /* #ab97b8 */
+}
+
+.menu-icons-user{
+    width: 5%;
+    filter: invert(89%) sepia(3%) saturate(8%) hue-rotate(17deg) brightness(80%) contrast(92%);
+
+
+    /* #b3b3b3 */
+}
+
+hr {
+    grid-area: hr;
+    border: 0;
+    clear:both;
+    display:block;
+    width: 80%;
+    background-color: black;
+    height: 1px;
 }
 
 form{
     grid-area: l;
     display: flex;
     flex-direction: column;
+}
+
+.login{
+    font-family: Verdana sans-serif;
+    color: rebeccapurple;
 }
 
 .input-field{
@@ -47,4 +89,8 @@ footer{
 footer > p{
     font-size: 0.7rem;
     color: white;
+}
+
+.impressum{
+    font-size: 0.5rem;
 }
