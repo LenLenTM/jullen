@@ -7,6 +7,10 @@ class RequestController {
         return model.verifyUser(req, res);
     }
 
+    async getUsername(req, res){
+        return res.status(200).send(req.session.user);
+    }
+
     async login(req, res){
 
         //let user = req.body;
@@ -37,6 +41,15 @@ class RequestController {
             res.send("Bad secret");
         }
 
+    }
+
+    async toggleConfirmation(req, res){
+
+        if (req.session.authenticate === true){
+            return model.toggleConfirmation(req, res);
+        }
+
+        return res.status(403).send('Could not update confirmation status');
     }
 }
 

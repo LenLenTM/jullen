@@ -1,0 +1,340 @@
+/*  COLORS
+
+Flieder: #ab97b8
+Flieder-dunkel: #876f96
+
+Icon-grau: #b3b3b3
+Icon-grau-dunkel: #9c9c9c
+
+Shadow: #adadad
+
+*/
+
+:root {
+    --confirmationHoverColor: #b3b3b3;
+    --cancellationHoverColor: #b3b3b3;
+}
+
+html{
+    height: 100%;
+}
+
+body {
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    margin: 0;
+    grid-template-areas:
+    "me"
+    "hr"
+    "un"
+    "err"
+    "um"
+    "wf"
+    "ws"
+    "im"
+    ;
+    background-image: url('images/flower_top1.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position-x: 0%;
+    background-position-y: 100%;
+}
+
+.menu{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    grid-area: me;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.menu-icons{
+    width: 5%;
+    filter: invert(60%) sepia(16%) saturate(452%) hue-rotate(233deg) brightness(103%) contrast(85%);
+    transition: 0.2s;
+    /* #ab97b8 */
+}
+
+.menu-icons-user{
+    width: 5%;
+    filter: invert(89%) sepia(3%) saturate(8%) hue-rotate(17deg) brightness(80%) contrast(92%);
+    transition: 0.2s;
+    /* #b3b3b3 */
+}
+
+.menu-icons:hover{
+    filter: invert(46%) sepia(10%) saturate(1101%) hue-rotate(233deg) brightness(97%) contrast(86%) drop-shadow(0px 5px 5px #adadad);
+    /* #876f96 */
+}
+
+.menu-icons-user:hover{
+    filter: invert(73%) sepia(0%) saturate(608%) hue-rotate(137deg) brightness(87%) contrast(87%) drop-shadow(0px 5px 5px #adadad);
+    /* #9c9c9c */
+}
+
+
+.divider {
+    grid-area: hr;
+    display:block;
+    width: 65%;
+    margin-bottom: 2rem;
+}
+
+.smallDivider {
+    grid-area: hr;
+    width: 40%;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+hr {
+    grid-area: hr;
+    border: 0;
+    clear:both;
+    display:block;
+    width: 80%;
+    background-color: #b3b3b3;
+    height: 0px;
+    margin-bottom: 2rem;
+}
+
+#username {
+    grid-area: un;
+    text-align: center;
+    font-family: Verdana;
+    font-weight: bold;
+    color: #ab97b8;
+    font-size: 1.5rem;
+}
+
+#errorMessage {
+    display: none;
+    grid-area: err;
+    width: 40%;
+    background-color: #333;
+    color: #fff; /* White text color */
+    font-family: Verdana;
+    font-weight: lighter;
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    z-index: 1; /* Add a z-index if needed */
+}
+
+#errorMessage.show {
+    display: flex;
+    justify-content: center;
+    font-size: 0.6rem;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 0; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 0; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 0; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 0; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+.loginPopUp{
+    grid-area: fo;
+    display: none;
+    box-sizing: border-box;
+    text-align: center;
+    width: 40%;
+}
+
+form{
+    display: block;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    border: 2px solid #b3b3b3;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    background-color: white;
+}
+
+.login{
+    font-family: Verdana;
+    font-weight: lighter;
+    color: #ab97b8;
+}
+
+.input-field{
+    margin-top: 2rem;
+}
+
+.input-field input{
+    width: 80%;
+    border: 2px solid #b3b3b3;
+    padding: 0.8rem;
+}
+
+.loginButton{
+    width: 80%;
+    border: 0px solid #ab97b8;
+    padding: 0.8rem;
+    background-color: #ab97b8;
+    color: white;
+    transition: .2s;
+}
+
+.loginButton:hover {
+    background-color: #876f96;
+    filter: drop-shadow(0px 5px 5px #adadad);
+}
+
+form input[type=text] {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+form input[type=password] {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+form .input-field:first-child{
+    margin-bottom: 1.5rem;
+}
+
+#credentialStatusBox {
+}
+
+.credentialStatus {
+    display: none;
+    width: 80%;
+    text-align: center;
+    font-family: Verdana;
+    font-weight: lighter;
+    color: indianred;
+    text-align: center;
+}
+
+.userMenu {
+    margin-top: 2rem;
+    grid-area: um;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    justify-items: center;
+    width: 40%;
+    border: 2px solid #b3b3b3;
+    background-color: white;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.userMenu > button {
+    margin: 1rem;
+    padding: 0.8rem;
+    width: 80%;
+    font-family: Verdana;
+    font-weight: lighter;
+    border: 0px solid #ab97b8;
+    background-color: #ab97b8;
+    color: white;
+    transition: .2s;
+}
+
+.userMenu > button:hover {
+    background-color: #876f96;
+    filter: drop-shadow(0px 5px 5px #adadad);
+}
+
+.weddingForm {
+    margin-top: 2rem;
+    grid-area: wf;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    justify-items: center;
+}
+
+.confirmation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-family: Verdana;
+    font-weight: lighter;
+    font-size: 1.6rem;
+}
+
+#confirmation, #cancellation {
+    color: #ab97b8;
+    width: 40%;
+    height: 6rem;
+    text-align: justify-all;
+    align-content: center;
+    line-height: 6rem;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    transition: .2s;
+}
+
+#confirmation:hover {
+    background-color: var(--confirmationHoverColor);
+    filter: drop-shadow(0px 5px 5px #adadad);
+}
+
+#cancellation:hover {
+    background-color: var(--cancellationHoverColor);
+    filter: drop-shadow(0px 5px 5px #adadad);
+}
+
+.comment {
+    width: 80%;
+    background-color: #e6e6e6;
+    color: #333333;
+    border: 0px solid #b3b3b3;
+    border-radius: 10px;
+    padding: 1rem;
+    height: 10rem;
+    resize: none;
+}
+
+.whiteSpace {
+    grid-area: ws;
+    height: 45rem;
+}
+
+footer{
+    grid-area: im;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #878787;
+}
+
+footer > p, a{
+    font-size: 0.7rem;
+    color: white;
+}
+
+.impressum{
+    font-size: 0.5rem;
+}

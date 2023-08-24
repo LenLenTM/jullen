@@ -96,6 +96,14 @@ class Data {
         }
     }
 
+    toggleConfirmation(req, res){
+        connection.query('update guests set commited = ? where username = ?', [req.body.confirmation, req.session.user], function (err, result) {
+            if (err) throw err;
+        })
+
+        return res.status(200).send('Confirmation updated');
+    }
+
 }
 
 module.exports = new Data();

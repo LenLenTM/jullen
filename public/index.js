@@ -21,13 +21,6 @@ function loadPage(){
             changeUserIcon();
         }
     });
-
-    let button = document.getElementById('submitLogin');
-    button.addEventListener("keypress", function (event) {
-        if (event.key === "Enter" && document.getElementById("loginPopUp").style.display !== "") {
-            login();
-        }
-    })
 }
 
 function login(){
@@ -48,7 +41,7 @@ function logout(){
     }).then(response => {
         if (response.status === 200){
             console.log("Logged out");
-            location.reload();
+            location.href = "https://jullen.at";
         }
         else {
             console.log("Error logging out");
