@@ -5,6 +5,8 @@ class User {
     }
 }
 
+
+
 function loadPage(){
     fetch('./api/verifyUser', {
         method: 'GET'
@@ -19,6 +21,13 @@ function loadPage(){
             changeUserIcon();
         }
     });
+
+    let button = document.getElementById('submitLogin');
+    button.addEventListener("keypress", function (event) {
+        if (event.key === "Enter" && document.getElementById("loginPopUp").style.display !== "") {
+            login();
+        }
+    })
 }
 
 function login(){
@@ -31,6 +40,20 @@ function login(){
     let user = new User(username, password);
 
     initiateSession(user);
+}
+
+function logout(){
+    fetch('/api/logout', {
+        method: 'GET'
+    }).then(response => {
+        if (response.status === 200){
+            console.log("Logged out");
+            location.reload();
+        }
+        else {
+            console.log("Error logging out");
+        }
+    });
 }
 
 async function initiateSession(user){
@@ -46,7 +69,7 @@ async function initiateSession(user){
             response.text()
                 .then(function (text){
                 document.getElementById('credentialStatus').innerText = text;
-                document.getElementById('credentialStatus').style.display = "flex";
+                document.getElementById('credentialStatus').style.display = "inline-block";
             })
         }
         else {
@@ -61,7 +84,12 @@ function clickUser(){
         method: 'GET'
     }).then(response => {
         if (response.status === 200){
-            window.location.replace("https://jullen.at/userPage");
+            if (document.getElementById("userMenu").style.display.toString() === ""){
+                document.getElementById("userMenu").style.display = "block";
+            }
+            else {
+                document.getElementById("userMenu").style.display = "";
+            }
         }
         else {
             if (document.getElementById("loginPopUp").style.display.toString() === ""){

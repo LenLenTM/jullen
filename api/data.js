@@ -81,6 +81,12 @@ class Data {
         });
     }
 
+    logout(req, res){
+        req.session.destroy();
+
+        return res.status(200).send("Logged out");
+    }
+
     verifyUser(req, res){
         if (req.session.authenticate === true){
             return res.status(200).send("User logged in");

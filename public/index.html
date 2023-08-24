@@ -10,6 +10,7 @@
 <body onload="loadPage()">
 
     <div class="menu">
+        <img class="menu-icons" src="icons/home.png" onclick="window.location.href='https://jullen.at'">
         <img class="menu-icons" src="icons/anwendungen.png" onclick="showErrorMessage('no applications implemented')">
         <img id="menu-user-icon" class="menu-icons-user" src="icons/benutzer.png" onclick="clickUser()">
         <img class="menu-icons" src="icons/einstellungen.png" onclick="showErrorMessage('no settings implemented')">
@@ -29,7 +30,7 @@
                 <input type="password" name="password" id="password" placeholder="Enter Password">
             </div>
             <div class="input-field">
-                <button class="loginButton" type="button" onclick="login()">Login</button>
+                <button class="loginButton" id="submitLogin" type="button" onclick="login()">Login</button>
             </div>
             <div class="input-field">
                 <button class="loginButton" type="button" onclick="closeForm()">Cancel</button>
@@ -39,6 +40,11 @@
             </div>
         </form>
 
+    </div>
+
+    <div class="userMenu" id="userMenu">
+        <button class="userMenuButton" type="button" onclick="window.location.href='https://jullen.at/userPage'">My page</button>
+        <button class="userMenuButton" type="button" onclick="logout()">Logout</button>
     </div>
 
     <div class="whiteSpace"></div>

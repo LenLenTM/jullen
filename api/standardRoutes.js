@@ -12,4 +12,10 @@ standardRoutes.get('', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+standardRoutes.get('/userPage', (req, res) => {
+    if (req.session.authenticate === true){
+        res.sendFile(path.join(__dirname, '../private/userPage.html'));
+    }
+})
+
 module.exports = standardRoutes;

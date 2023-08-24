@@ -18,6 +18,10 @@ class RequestController {
         return model.login(req, res);
     }
 
+    async logout(req, res){
+        return model.logout(req, res);
+    }
+
     async register(req, res){
 
         //let user = req.body;

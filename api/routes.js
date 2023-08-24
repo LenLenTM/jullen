@@ -7,5 +7,6 @@ routes.post('/login', requestController.login);
 routes.post('/register', requestController.register);
 
 routes.get('/verifyUser', requestController.verifyUser);
+routes.get('/logout', requestController.logout);
 
 module.exports = routes;
