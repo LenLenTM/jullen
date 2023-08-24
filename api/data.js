@@ -74,7 +74,7 @@ class Data {
             }
             else {
                 req.session.authenticate = true;
-                req.session.user = queryResult[0].username;
+                req.session.user = result[0].username;
 
                 return res.status(200).send("Login okay");
             }

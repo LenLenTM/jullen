@@ -21,19 +21,23 @@ html{
 
 body {
     display: grid;
+    flex-direction: column;
     justify-content: center;
     justify-items: center;
+    margin: 0;
     grid-template-areas:
     "me"
     "hr"
     "err"
     "fo"
-    "im";
+    "ws"
+    "im"
+    ;
     background-image: url('images/flower_top1.png');
     background-size: 60%;
     background-repeat: no-repeat;
     background-position-x: 0%;
-    background-position-y: 150%;
+    background-position-y: 100%;
 }
 
 .menu{
@@ -140,8 +144,7 @@ hr {
 }
 
 form{
-    display: flex;
-    box-sizing: border-box;
+    display: block;
     text-align: center;
     justify-content: center;
     width: 100%;
@@ -213,17 +216,20 @@ form .input-field:first-child{
     color: indianred;
 }
 
+.whiteSpace {
+    grid-area: ws;
+    height: 45rem;
+}
+
 footer{
     grid-area: im;
-    position: absolute;
     left: 0;
-    bottom: 0;
     width: 100%;
     text-align: center;
     background-color: #878787;
 }
 
-footer > p{
+footer > p, a{
     font-size: 0.7rem;
     color: white;
 }

@@ -50,8 +50,7 @@ async function initiateSession(user){
             })
         }
         else {
-            console.log("next");
-            //location.reload();
+            location.reload();
         }
     })
 }
@@ -66,7 +65,7 @@ function clickUser(){
         }
         else {
             if (document.getElementById("loginPopUp").style.display.toString() === ""){
-                document.getElementById("loginPopUp").style.display = "flex";
+                document.getElementById("loginPopUp").style.display = "block";
             }
             else {
                 closeForm()
