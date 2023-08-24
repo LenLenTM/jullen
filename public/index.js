@@ -62,8 +62,21 @@ function clickUser(){
     else {
         document.getElementById("loginPopUp").style.display = "";
     }
+
 }
 
 function closeForm(){
     document.getElementById("loginPopUp").style.display = "";
+}
+
+function changeUserIcon(){
+
+    if (document.getElementById('menu-user-icon').classList.contains('menu-icons-user')){
+        document.getElementById('menu-user-icon').classList.remove('menu-icons-user');
+        document.getElementById('menu-user-icon').classList.add('menu-icons');
+    }
+    else {
+        document.getElementById('menu-user-icon').classList.remove('menu-icons');
+        document.getElementById('menu-user-icon').classList.add('menu-icons-user');
+    }
 }

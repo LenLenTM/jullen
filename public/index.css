@@ -1,3 +1,20 @@
+/*  COLORS
+
+Flieder: #ab97b8
+Flieder-dunkel: #876f96
+
+Icon-grau: #b3b3b3
+Icon-grau-dunkel: #9c9c9c
+
+Shadow: #adadad
+
+*/
+
+:root {
+    --userIconColor: #b3b3b3;
+    --userIconHoverColor: #9c9c9c;
+}
+
 html{
     height: 100%;
 }
@@ -31,16 +48,29 @@ body {
 .menu-icons{
     width: 5%;
     filter: invert(60%) sepia(16%) saturate(452%) hue-rotate(233deg) brightness(103%) contrast(85%);
+    transition: 0.2s;
     /* #ab97b8 */
 }
 
 .menu-icons-user{
     width: 5%;
     filter: invert(89%) sepia(3%) saturate(8%) hue-rotate(17deg) brightness(80%) contrast(92%);
-
-
+    transition: 0.2s;
     /* #b3b3b3 */
 }
+
+.menu-icons:hover{
+    filter: invert(46%) sepia(10%) saturate(1101%) hue-rotate(233deg) brightness(97%) contrast(86%) drop-shadow(0px 5px 5px #adadad);
+    /* #876f96 */
+}
+
+.menu-icons-user:hover{
+    filter: invert(73%) sepia(0%) saturate(608%) hue-rotate(137deg) brightness(87%) contrast(87%) drop-shadow(0px 5px 5px #adadad);
+    /* #9c9c9c */
+}
+
+
+
 
 .divider {
     grid-area: hr;
@@ -102,6 +132,22 @@ form{
     padding: 0.8rem;
     background-color: #ab97b8;
     color: white;
+    transition: .2s;
+}
+
+.loginButton:hover {
+    background-color: #876f96;
+    filter: drop-shadow(0px 5px 5px #adadad);
+}
+
+form input[type=text] {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+form input[type=password] {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 
 form .input-field:first-child{
