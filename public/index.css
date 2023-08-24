@@ -26,6 +26,7 @@ body {
     grid-template-areas:
     "me"
     "hr"
+    "err"
     "fo"
     "im";
     background-image: url('images/flower_top1.png');
@@ -70,8 +71,6 @@ body {
 }
 
 
-
-
 .divider {
     grid-area: hr;
     display:block;
@@ -90,6 +89,48 @@ hr {
     margin-bottom: 2rem;
 }
 
+#errorMessage {
+    display: none;
+    grid-area: err;
+    width: 40%;
+    background-color: #333;
+    color: #fff; /* White text color */
+    font-family: Verdana;
+    font-weight: lighter;
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    z-index: 1; /* Add a z-index if needed */
+}
+
+#errorMessage.show {
+    display: flex;
+    justify-content: center;
+    font-size: 0.6rem;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 0; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 0; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 0; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 0; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
 .loginPopUp{
     grid-area: fo;
     display: none;
@@ -102,6 +143,7 @@ form{
     display: flex;
     box-sizing: border-box;
     text-align: center;
+    justify-content: center;
     width: 100%;
     flex-direction: column;
     border: 2px solid #b3b3b3;
@@ -152,6 +194,23 @@ form input[type=password] {
 
 form .input-field:first-child{
     margin-bottom: 1.5rem;
+}
+
+#credentialStatusBox {
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    margin-left: 2rem;
+}
+
+.credentialStatus {
+    display: none;
+    width: 80%;
+    text-align: center;
+    align-content: center;
+    font-family: Verdana;
+    font-weight: lighter;
+    color: indianred;
 }
 
 footer{

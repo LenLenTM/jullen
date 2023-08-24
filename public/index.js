@@ -5,7 +5,23 @@ class User {
     }
 }
 
-function postUserCredentials(){
+function loadPage(){
+    fetch('./api/verifyUser', {
+        method: 'GET'
+    }).then(response => {
+        if (response.status === 403){
+            response.text()
+                .then(function (text){
+                    console.log(text);
+                })
+        }
+        else if (response.status === 200) {
+            changeUserIcon();
+        }
+    });
+}
+
+function login(){
 
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
@@ -25,48 +41,45 @@ async function initiateSession(user){
             "Content-Type": "application/json",
         },
         body: JSON.stringify(user)
-    }).then(function (response){
-        response.text()
-        .then(function (url){
-            console.log(url);
-            //location.href = url;
-        })})
-
+    }).then(response => {
+        if (response.status === 403){
+            response.text()
+                .then(function (text){
+                document.getElementById('credentialStatus').innerText = text;
+                document.getElementById('credentialStatus').style.display = "flex";
+            })
+        }
+        else {
+            console.log("next");
+            //location.reload();
+        }
+    })
 }
 
 function clickUser(){
 
-    /*fetch('./api/verifyUser', {
+    fetch('./api/verifyUser', {
         method: 'GET'
-    }).then(function (res){
-        res.text()
-            .then(function (text) {
-                if (text === "true"){
-                    window.location.replace("https://jullen.at/userPage");
-                }
-                else {
-                    if (document.getElementById("loginPopUp").style.display.toString() === "none"){
-                        document.getElementById("loginPopUp").style.display = "flex";
-                    }
-                    else {
-                        document.getElementById("loginPopUp").style.display = "none";
-                    }
-                }
-            })
-    });*/
-
-
-    if (document.getElementById("loginPopUp").style.display.toString() === ""){
-        document.getElementById("loginPopUp").style.display = "flex";
-    }
-    else {
-        document.getElementById("loginPopUp").style.display = "";
-    }
-
+    }).then(response => {
+        if (response.status === 200){
+            window.location.replace("https://jullen.at/userPage");
+        }
+        else {
+            if (document.getElementById("loginPopUp").style.display.toString() === ""){
+                document.getElementById("loginPopUp").style.display = "flex";
+            }
+            else {
+                closeForm()
+            }
+        }
+    });
 }
 
 function closeForm(){
     document.getElementById("loginPopUp").style.display = "";
+    document.getElementById('credentialStatus').style.display = "";
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
 }
 
 function changeUserIcon(){
@@ -79,4 +92,11 @@ function changeUserIcon(){
         document.getElementById('menu-user-icon').classList.remove('menu-icons');
         document.getElementById('menu-user-icon').classList.add('menu-icons-user');
     }
+}
+
+function showErrorMessage(text){
+    var messageBox = document.getElementById('errorMessage');
+    messageBox.innerText = text;
+    messageBox.className = "show";
+    setTimeout(function(){ messageBox.className = messageBox.className.replace("show", ""); }, 3000);
 }

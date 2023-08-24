@@ -11,6 +11,8 @@ const connection = mysql.createConnection({
     database: "JullenMarriageGuestlist"
 });
 
+connection.connect(function (err){});
+
 class Data {
 
     register(req, res){
@@ -19,7 +21,7 @@ class Data {
         const sha512 = crypto.createHash('sha512');
         const hash = sha512.update(value).digest('hex');
 
-        connection.connect(function (err){});
+        //connection.connect(function (err){});
 
         connection.query('SELECT * FROM guests WHERE username=?', [req.body.username], function (err, result) {
             if(err) throw err;
@@ -44,30 +46,48 @@ class Data {
         const user = req.body;
 
         const value = user.username.concat(user.password);
-        const hash = crypto.createHash('sha512', value).digest('hex');
+        const sha512 = crypto.createHash('sha512');
+        const hash = sha512.update(value).digest('hex');
 
         let queryResult;
 
-        connection.connect(function(err) {
+        /*connection.connect(function(err) {
             if (err) throw err;
-            console.log("Connected!");
             connection.query('SELECT * FROM guests WHERE passwordHash=?', [hash], function (err, result) {
                 if (err) throw err;
-                queryResult = result;
-                console.log(result[0].username);
-            });
-        });
+                if (result.length === 0){
+                    return res.status(403).send("Bad credentials");
+                }
+                else {
+                    req.session.authenticate = true;
+                    req.session.user = queryResult[0].username;
 
-        if (queryResult[0].passwordHash && queryResult[0].username === user.username){
-            req.session.authenticate = true;
-            req.session.user = queryResult[0].username;
+                    return res.status(200).send("Login okay");
+                }
+            });
+        });*/
+
+        connection.query('SELECT * FROM guests WHERE passwordHash=?', [hash], function (err, result) {
+            if (err) throw err;
+            if (result.length === 0){
+                return res.status(403).send("Bad credentials");
+            }
+            else {
+                req.session.authenticate = true;
+                req.session.user = queryResult[0].username;
+
+                return res.status(200).send("Login okay");
+            }
+        });
+    }
+
+    verifyUser(req, res){
+        if (req.session.authenticate === true){
+            return res.status(200).send("User logged in");
         }
         else {
-            res.status(403).json({ msg: "Bad credentials" });
-            return "Bad credentials";
+            return res.status(403).send("User not logged in");
         }
-
-        return "userPage.html";
     }
 
 }

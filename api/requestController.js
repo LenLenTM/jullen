@@ -3,6 +3,10 @@ const { request } = require('express');
 
 class RequestController {
 
+    async verifyUser(req, res){
+        return model.verifyUser(req, res);
+    }
+
     async login(req, res){
 
         //let user = req.body;
@@ -11,7 +15,7 @@ class RequestController {
 
         //TODO: validate user credentials
 
-        res.send(model.login(req, res));
+        return model.login(req, res);
     }
 
     async register(req, res){

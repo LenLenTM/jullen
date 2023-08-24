@@ -6,4 +6,6 @@ const authSession = require('./authSession.js');
 routes.post('/login', requestController.login);
 routes.post('/register', requestController.register);
 
+routes.get('/verifyUser', requestController.verifyUser);
+
 module.exports = routes;
