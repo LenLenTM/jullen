@@ -33,3 +33,37 @@ async function initiateSession(user){
         })})
 
 }
+
+function clickUser(){
+
+    /*fetch('./api/verifyUser', {
+        method: 'GET'
+    }).then(function (res){
+        res.text()
+            .then(function (text) {
+                if (text === "true"){
+                    window.location.replace("https://jullen.at/userPage");
+                }
+                else {
+                    if (document.getElementById("loginPopUp").style.display.toString() === "none"){
+                        document.getElementById("loginPopUp").style.display = "flex";
+                    }
+                    else {
+                        document.getElementById("loginPopUp").style.display = "none";
+                    }
+                }
+            })
+    });*/
+
+
+    if (document.getElementById("loginPopUp").style.display.toString() === ""){
+        document.getElementById("loginPopUp").style.display = "flex";
+    }
+    else {
+        document.getElementById("loginPopUp").style.display = "";
+    }
+}
+
+function closeForm(){
+    document.getElementById("loginPopUp").style.display = "";
+}

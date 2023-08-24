@@ -1,19 +1,27 @@
+html{
+    height: 100%;
+}
+
 body {
-    background-color: #edeef0;
     display: grid;
     justify-content: center;
-    min-height: 100%;
+    justify-items: center;
     grid-template-areas:
-    "m"
+    "me"
     "hr"
-    "l"
-    "f";
+    "fo"
+    "im";
+    background-image: url('images/flower_top1.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position-x: 0%;
+    background-position-y: 150%;
 }
 
 .menu{
     margin-top: 2rem;
     margin-bottom: 2rem;
-    grid-area: m;
+    grid-area: me;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -34,56 +42,80 @@ body {
     /* #b3b3b3 */
 }
 
+.divider {
+    grid-area: hr;
+    display:block;
+    width: 65%;
+    margin-bottom: 2rem;
+}
+
 hr {
     grid-area: hr;
     border: 0;
     clear:both;
     display:block;
     width: 80%;
-    background-color: black;
-    height: 1px;
+    background-color: #b3b3b3;
+    height: 0px;
+    margin-bottom: 2rem;
+}
+
+.loginPopUp{
+    grid-area: fo;
+    display: none;
+    box-sizing: border-box;
+    text-align: center;
+    width: 40%;
 }
 
 form{
-    grid-area: l;
     display: flex;
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
     flex-direction: column;
+    border: 2px solid #b3b3b3;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    background-color: white;
 }
 
 .login{
-    font-family: Verdana sans-serif;
-    color: rebeccapurple;
+    font-family: Verdana;
+    font-weight: lighter;
+    color: #ab97b8;
 }
 
 .input-field{
-    position: relative;
     margin-top: 2rem;
 }
 
 .input-field input{
+    width: 80%;
+    border: 2px solid #b3b3b3;
     padding: 0.8rem;
+}
+
+.loginButton{
+    width: 80%;
+    border: 0px solid #ab97b8;
+    padding: 0.8rem;
+    background-color: #ab97b8;
+    color: white;
 }
 
 form .input-field:first-child{
     margin-bottom: 1.5rem;
 }
 
-form button[type="submit"]{
-    background: linear-gradient(to left, #4776E6, #8e54e9);
-    color: white;
-    border-radius: 4px;
-    margin-top: 2rem;
-    padding: 0.4rem;
-}
-
 footer{
-    grid-area: f;
+    grid-area: im;
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
     text-align: center;
-    background-color: black;
+    background-color: #878787;
 }
 
 footer > p{
