@@ -104,6 +104,14 @@ class Data {
         return res.status(200).send('Confirmation updated');
     }
 
+    submitComment(req, res){
+        connection.query('update guests set comment = ? where username = ?', [req.body.comment, req.session.user], function (err, result) {
+            if (err) throw err;
+        })
+
+        return res.status(200).send('Comment send');
+    }
+
 }
 
 module.exports = new Data();

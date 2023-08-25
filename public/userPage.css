@@ -299,11 +299,21 @@ form .input-field:first-child{
 #confirmation:hover {
     background-color: var(--confirmationHoverColor);
     filter: drop-shadow(0px 5px 5px #adadad);
+    color: white;
 }
 
 #cancellation:hover {
     background-color: var(--cancellationHoverColor);
     filter: drop-shadow(0px 5px 5px #adadad);
+    color: white;
+}
+
+#confirmation:active {
+    background-color: #e6e6e6;
+}
+
+#cancellation:active {
+    background-color: #e6e6e6;
 }
 
 .comment {
@@ -315,6 +325,30 @@ form .input-field:first-child{
     padding: 1rem;
     height: 10rem;
     resize: none;
+}
+
+.submitComment {
+    width: 80%;
+    background-color: #e6e6e6;
+    border: 0px solid #b3b3b3;
+    border-radius: 10px;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    height: 1rem;
+    font-family: Verdana;
+    font-weight: lighter;
+    color: #ab97b8;
+    line-height: 0.8rem;
+}
+
+.submitComment:hover {
+    background-color: #b3b3b3;
+    color: white;
+    filter: drop-shadow(0px 5px 5px #adadad);
+}
+
+.submitComment:active {
+    background-color: #e6e6e6;
 }
 
 .whiteSpace {

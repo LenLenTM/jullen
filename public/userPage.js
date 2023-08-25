@@ -79,6 +79,8 @@ function getUsername(){
 
 function toggleConfirmation(){
 
+    console.log("confirm");
+
     let button = document.getElementById('confirmation');
 
     if (button.style.backgroundColor !== 'rgb(181, 219, 160)'){
@@ -92,6 +94,7 @@ function toggleConfirmation(){
     else {
         button.style.backgroundColor = '#e6e6e6';
         button.color = '#ab97b8';
+        toggleDatabaseConfirmation(null);
     }
 }
 
@@ -110,6 +113,7 @@ function toggleCancellation(){
     else {
         button.style.backgroundColor = '#e6e6e6';
         button.color = '#ab97b8';
+        toggleDatabaseConfirmation(null);
     }
 }
 
@@ -126,4 +130,21 @@ function toggleDatabaseConfirmation(bool){
                 .then(function (text){
                     console.log(text);
         })});
+}
+
+function submitComment(){
+
+    let comment = document.getElementById('comment').value;
+
+    fetch('./api/submitComment', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({"comment":comment})
+    }).then(response => {
+        response.text()
+            .then(function (text){
+                console.log(text);
+            })});
 }

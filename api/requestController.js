@@ -51,6 +51,14 @@ class RequestController {
 
         return res.status(403).send('Could not update confirmation status');
     }
+
+    async submitComment(req, res){
+        if (req.session.authenticate === true){
+            return model.submitComment(req, res);
+        }
+
+        return res.status(403).status('Could not submit comment');
+    }
 }
 
 module.exports = new RequestController();
