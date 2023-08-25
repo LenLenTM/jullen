@@ -83,6 +83,18 @@ class RequestController {
 
         return res.status(403).send('Could not change password');
     }
+
+    async isAdmin(req, res){
+        return model.isAdmin(req, res);
+    }
+
+    async guestInfo(req, res){
+        if (req.session.authenticate === true){
+            return model.guestInfo(req, res);
+        }
+
+        return res.status(403).send('Error collecting guest data');
+    }
 }
 
 module.exports = new RequestController();

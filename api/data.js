@@ -124,7 +124,6 @@ class Data {
         connection.query('select * from guests where username = ?', [req.session.user], function (err, result) {
             if (err) throw err;
             if (result.length !== 0){
-                console.log(result[0].comment);
                 return res.status(200).send({confirmation: result[0].commited, comment: result[0].comment,
                                             sex: result[0].sex, name: result[0].username.toString(),
                                             email: result[0].email});
@@ -147,6 +146,38 @@ class Data {
         });
 
         return res.status(200).send('Changed password');
+    }
+
+    isAdmin(req, res){
+
+        connection.query('select * from guests where username = ?', [req.session.user], function (err, result) {
+            if (err) throw err;
+            if (result.length !== 0){
+                if (result[0].admin === 1){
+                    return true;
+                }
+            }
+            return false;
+        });
+        return false;
+    }
+
+    guestInfo(req, res){
+
+        let guestlist = [];
+
+        connection.query('select * from guests where username = ?', [req.session.user], function (err, result) {
+            if (err) throw err;
+            if (result.length !== 0) {
+                if (result[0].admin === 1) {
+                    connection.query('select username, commited, comment, email from guests', function (err, result) {
+                        result.forEach((tupel) => guestlist.push(tupel));
+                        return res.status(200).send(guestlist);
+                    });
+                }
+            }
+            //return res.status(412).send('Error loading user data');
+        });
     }
 }
 

@@ -447,3 +447,38 @@ footer > p, a{
 #adminButton {
     width: 25%;
 }
+
+#infoTable {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.confirmationIndicator {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 10px;
+    margin-right: 1.4rem;
+}
+
+.userField {
+    margin-right: 1.4rem;
+    width: 22%;
+}
+
+.commentField {
+    margin-right: 1.4rem;
+    width: 33%;
+    align-content: center;
+}
+
+.emailField {
+    width: 33%;
+}

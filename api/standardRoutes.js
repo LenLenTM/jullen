@@ -2,6 +2,7 @@ const { Router } = require('express');
 const standardRoutes = Router();
 const authSession = require('./authSession.js');
 const path = require('path');
+const requestController = require('./requestController.js');
 
 /*standardRoutes.get('/loggedTest', authSession, (req, res, next) => {
     console.log("standardRoutes");
@@ -21,6 +22,12 @@ standardRoutes.get('/userPage', (req, res) => {
 standardRoutes.get('/changePassword', (req, res) => {
     if (req.session.authenticate === true){
         res.sendFile(path.join(__dirname, '../private/changePassword.html'));
+    }
+})
+
+standardRoutes.get('/admin', (req, res) => {
+    if (req.session.authenticate === true && requestController.isAdmin(req, res)){
+        res.sendFile(path.join(__dirname, '../private/admin.html'));
     }
 })
 

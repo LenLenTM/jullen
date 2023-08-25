@@ -14,5 +14,6 @@ routes.get('/verifyUser', requestController.verifyUser);
 routes.get('/logout', requestController.logout);
 routes.get('/getUsername', requestController.getUsername);
 routes.get('/getUserConfiguration', requestController.getUserConfiguration);
+routes.get('/guestInfo', requestController.guestInfo);
 
 module.exports = routes;
