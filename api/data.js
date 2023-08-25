@@ -49,32 +49,17 @@ class Data {
         const sha512 = crypto.createHash('sha512');
         const hash = sha512.update(value).digest('hex');
 
-        let queryResult;
 
-        /*connection.connect(function(err) {
+        connection.query('SELECT * FROM guests WHERE passwordHash=?', [hash], async function (err, result) {
             if (err) throw err;
-            connection.query('SELECT * FROM guests WHERE passwordHash=?', [hash], function (err, result) {
-                if (err) throw err;
-                if (result.length === 0){
-                    return res.status(403).send("Bad credentials");
-                }
-                else {
-                    req.session.authenticate = true;
-                    req.session.user = queryResult[0].username;
-
-                    return res.status(200).send("Login okay");
-                }
-            });
-        });*/
-
-        connection.query('SELECT * FROM guests WHERE passwordHash=?', [hash], function (err, result) {
-            if (err) throw err;
-            if (result.length === 0){
+            if (result.length === 0) {
                 return res.status(403).send("Bad credentials");
-            }
-            else {
+            } else {
                 req.session.authenticate = true;
                 req.session.user = result[0].username;
+                if (result[0].admin === 1){
+                    req.session.superuser = true;
+                }
 
                 return res.status(200).send("Login okay");
             }
@@ -132,7 +117,7 @@ class Data {
         //return res.status(403).send('Could not find user configuration');
     }
 
-    changePassword(req, res){
+    changePassword(req, res) {
 
         let password = req.body.password;
         let username = req.session.user;
@@ -146,20 +131,6 @@ class Data {
         });
 
         return res.status(200).send('Changed password');
-    }
-
-    isAdmin(req, res){
-
-        connection.query('select * from guests where username = ?', [req.session.user], function (err, result) {
-            if (err) throw err;
-            if (result.length !== 0){
-                if (result[0].admin === 1){
-                    return true;
-                }
-            }
-            return false;
-        });
-        return false;
     }
 
     guestInfo(req, res){

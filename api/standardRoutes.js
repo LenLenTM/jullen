@@ -26,8 +26,12 @@ standardRoutes.get('/changePassword', (req, res) => {
 })
 
 standardRoutes.get('/admin', (req, res) => {
-    if (req.session.authenticate === true && requestController.isAdmin(req, res)){
+    if (req.session.authenticate === true && req.session.superuser === true){
+        console.log("is admin");
         res.sendFile(path.join(__dirname, '../private/admin.html'));
+    }
+    else {
+        res.sendFile(path.join(__dirname, '../public/index.html'));
     }
 })
 

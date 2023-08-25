@@ -13,9 +13,10 @@ class RequestController {
 
     async login(req, res){
 
-        let password = req.body.user.password;
-        let username = req.body.user.username;
+        let password = req.body.password;
+        let username = req.body.username;
 
+        /*
         if (password.toString().length > 20){
             return res.status(403).send("Password too long");
         }
@@ -33,7 +34,7 @@ class RequestController {
         }
         else if (containsNumbers(username)){
             return res.status(403).send("Username must not contain numbers");
-        }
+        }*/
 
         return model.login(req, res);
     }
@@ -101,10 +102,6 @@ class RequestController {
         }
 
         return res.status(403).send('Could not change password');
-    }
-
-    async isAdmin(req, res){
-        return model.isAdmin(req, res);
     }
 
     async guestInfo(req, res){

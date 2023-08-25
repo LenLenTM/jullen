@@ -445,5 +445,6 @@ footer > p, a{
 }
 
 #adminButton {
+    display: none;
     width: 25%;
 }

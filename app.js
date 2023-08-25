@@ -8,22 +8,12 @@ const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 const Redis = require('ioredis');
-const login = require('./api/login');
 
 const app = express();
 const hostname = '10.10.10.100';
 const PORT = 443;
 
 const oneDay = 1000 * 60 * 60 * 24;
-const loginlimiter = rateLimit({
-    windowMs: 10 * 60 * 1000,
-    max: 5,
-    standardHeaders: true,
-    legacyHeaders: false,
-});
-const redis = new Redis();
-const maxNumberOfFailedLogins = 3;
-const timeWindowForFailedLogins = 60 * 60;
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -42,8 +32,6 @@ const routes = require('./api/routes.js');
 const standardRoutes = require('./api/standardRoutes');
 app.use('/api', routes);
 app.use('/', standardRoutes);
-
-app.use('/api/login', loginlimiter);
 
 const options = {
     key: fs.readFileSync("/home/Lena/jullen/certs/_.jullen.at_private_key.key"),

@@ -54,6 +54,14 @@ function initializeFields(){
                 document.getElementById('email').value = data.email.toString();
             }
         });
+
+    fetch('./api/isAdmin', {
+        method: 'GET'
+    }).then(response => {
+        if (response.status === 200){
+            document.getElementById('adminButton').style.display = "inline-block";
+        }
+    })
 }
 
 function logout(){
@@ -170,6 +178,7 @@ function submitComment(){
             .then(function (text){
                 console.log(text);
                 showErrorMessage('Kommentar gesendet');
+                location.reload();
             })});
 }
 
@@ -188,6 +197,7 @@ function submitEmail(){
             .then(function (text){
                 console.log(text);
                 showErrorMessage('Email gesendet');
+                location.reload();
             })});
 }
 
