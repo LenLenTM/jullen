@@ -13,11 +13,27 @@ class RequestController {
 
     async login(req, res){
 
-        //let user = req.body;
-        //let password = req.body.user.password;
-        //console.log(user.username + " | " + user.password);
+        let password = req.body.user.password;
+        let username = req.body.user.username;
 
-        //TODO: validate user credentials
+        if (password.toString().length > 20){
+            return res.status(403).send("Password too long");
+        }
+        else if (username.toString().length > 30){
+            return res.status(403).send("Username too long");
+        }
+        else if (username.toString().length < 4){
+            return res.status(403).send("Username too short");
+        }
+        else if (password.toString().length < 8){
+            return res.status(403).send("Password too short");
+        }
+        else if (containsSpecialChars(username)){
+            return res.status(403).send("Username must not contain special characters");
+        }
+        else if (containsNumbers(username)){
+            return res.status(403).send("Username must not contain numbers");
+        }
 
         return model.login(req, res);
     }
@@ -28,19 +44,12 @@ class RequestController {
 
     async register(req, res){
 
-        //let user = req.body;
-        //let password = req.body.user.password;
-        //console.log(user.username + " | " + user.password);
-
-        //TODO: validate user credentials
-
         if (req.body.secret === "le262na18"){
             res.send(model.register(req, res));
         }
         else {
             res.send("Bad secret");
         }
-
     }
 
     async toggleConfirmation(req, res){
@@ -77,6 +86,16 @@ class RequestController {
     }
 
     async changePassword(req, res){
+
+        const password = req.body.password;
+
+        if (password.toString().length < 8){
+            return res.status(403).send('Password too short');
+        }
+        else if (password.toString().length > 20){
+            return res.status(403).send('Password too long');
+        }
+
         if(req.session.authenticate === true){
             return model.changePassword(req, res);
         }
@@ -95,6 +114,15 @@ class RequestController {
 
         return res.status(403).send('Error collecting guest data');
     }
+}
+
+function containsSpecialChars(str) {
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(str);
+}
+
+function containsNumbers(str) {
+    return /\d/.test(str);
 }
 
 module.exports = new RequestController();

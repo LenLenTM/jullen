@@ -28,8 +28,6 @@ function login(){
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    //TODO: validate input. Also on server side.
-
     let user = new User(username, password);
 
     initiateSession(user);
@@ -121,7 +119,10 @@ function changePassword(){
             location.href='https://jullen.at/userPage';
         }
         else {
-            showErrorMessage("Could not change password");
+            response.text()
+                .then(function (text){
+                    showErrorMessage(text);
+                })
         }
     })
 }
