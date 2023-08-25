@@ -18,4 +18,10 @@ standardRoutes.get('/userPage', (req, res) => {
     }
 })
 
+standardRoutes.get('/changePassword', (req, res) => {
+    if (req.session.authenticate === true){
+        res.sendFile(path.join(__dirname, '../private/changePassword.html'));
+    }
+})
+
 module.exports = standardRoutes;

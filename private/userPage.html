@@ -12,28 +12,57 @@
 <div class="menu">
     <img class="menu-icons" src="icons/home.png" onclick="window.location.href='https://jullen.at'">
     <img class="menu-icons" src="icons/anwendungen.png" onclick="showErrorMessage('no applications implemented')">
-    <img id="menu-user-icon" class="menu-icons" src="icons/benutzer.png" onclick="clickUser()">
+    <img id="menu-user-icon" class="menu-icons" src="icons/ringe-hochzeit.png" onclick="clickUser()">
     <img class="menu-icons" src="icons/einstellungen.png" onclick="showErrorMessage('no settings implemented')">
 </div>
 
 <img class="divider" src="images/divider_flower1.png">
 
-<div id="username">Username</div>
-
 <div id="errorMessage">A Message</div>
 
-<div class="userMenu" id="userMenu">
-    <button class="userMenuButton" type="button" onclick="logout()">Logout</button>
-</div>
-
 <div class="weddingForm">
+    <h2 id="headline"></h2>
+    <p>
+        nun ist es bald soweit: Wir werden heiraten! Die Trauung und die anschließende
+        Feier wird im Heurigen Wolff in 1190 Wien um 14:00 stattfinden. Dazu laden wir dich
+        ganz herzlich ein. Wir freuen uns, diesen Tag mit den wichtigsten Menschen in
+        unserem Leben zu teilen.
+        <br>
+    </p>
+    <p id="names">
+        Lena & Julia
+    </p>
+    <p>
+        <br>
+        <br>
+        Ablauf <br>
+        <br>
+        <b>13:30:</b> Treffpunkt beim Heurigen Wolff <br>(Rathstraße 46-50, 1190 Wien)<br>
+        <b>14:00:</b> Trauung zwischen den Weinstöcken<br>
+        <b>Anschließend:</b> Feier mit gutem Essen und Unterhaltung im Preßstüberl<br>
+    </p>
+    <p id="facts">
+        3. August 2024<br>
+        13:30 Uhr<br>
+        Heuriger Wolff<br>
+        Rathstraße 46-50<br>
+        1190 Wien<br>
+    </p>
+    <p id="siteIfos">
+        Auf dieser Seite findet ihr Schaltflächen zum Zu- bzw. Absagen sowie ein Kommentarfeld.
+        Weiters ein Feld für eure E-Mail-Adresse damit wir euch ggf Änderungen in der Planung mitteilen können.
+    </p>
+    <img class="smallDivider" src="images/divider_flower1.png">
     <div class="confirmation">
         <div id="confirmation" onclick="toggleConfirmation()">Zusage</div>
         <div id="cancellation" onclick="toggleCancellation()">Absage</div>
     </div>
-    <img class="smallDivider" src="images/divider_flower1.png">
     <textarea id="comment" class="comment" placeholder="Kommentare hier bitte ..."></textarea>
     <div class="submitComment" onclick="submitComment()">Kommentar senden</div>
+    <input type="email" id="email" placeholder="E-Mail Addresse ...">
+    <div class="submitComment" onclick="submitEmail()">E-Mail senden</div>
+    <button id="logout" class="userMenuButton" type="button" onclick="logout()">Logout</button>
+    <button id="changePassword" class="userMenuButton" type="button" onclick="window.location.href='https://jullen.at/changePassword'">Passwort ändern</button>
 </div>
 
 <div class="whiteSpace"></div>

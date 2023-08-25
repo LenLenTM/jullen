@@ -60,12 +60,28 @@ class RequestController {
         return res.status(403).send('Could not submit comment');
     }
 
+    async submitEmail(req, res){
+        if (req.session.authenticate === true){
+            return model.submitEmail(req, res);
+        }
+
+        return res.status(403).send('Could not submit email');
+    }
+
     async getUserConfiguration(req, res){
         if (req.session.authenticate === true){
             return model.getUserConfiguration(req, res);
         }
 
         return res.status(403).send('Could not fetch user configuration');
+    }
+
+    async changePassword(req, res){
+        if(req.session.authenticate === true){
+            return model.changePassword(req, res);
+        }
+
+        return res.status(403).send('Could not change password');
     }
 }
 

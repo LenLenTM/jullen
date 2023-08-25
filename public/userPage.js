@@ -19,11 +19,7 @@ function loadPage(){
         }
     });
 
-    getUsername();
-
     initializeFields();
-
-    //TODO: initialise confirmation colors
 }
 
 function initializeFields(){
@@ -44,6 +40,19 @@ function initializeFields(){
                 button.style.backgroundColor = 'indianred';
                 button.color = 'white';
             }
+
+            let title;
+
+            if (data.sex === 1){
+                title = 'Lieber';
+            }
+            else title = 'Liebe';
+
+            document.getElementById('headline').innerText = title + " " + data.name + ",";
+
+            if (data.email !== null){
+                document.getElementById('email').value = data.email.toString();
+            }
         });
 }
 
@@ -61,17 +70,6 @@ function logout(){
     });
 }
 
-
-function clickUser(){
-
-    if (document.getElementById("userMenu").style.display.toString() === ""){
-        document.getElementById("userMenu").style.display = "block";
-    }
-    else {
-        document.getElementById("userMenu").style.display = "";
-    }
-}
-
 function showErrorMessage(text){
     var messageBox = document.getElementById('errorMessage');
     messageBox.innerText = text;
@@ -87,13 +85,15 @@ function getUsername(){
         if (response.status === 200){
             response.text()
                 .then(function (username){
-                    document.getElementById('username').innerText = username;
+                    console.log(username);
+                    return username;
                 });
         }
         else if (response.status === 403){
             console.log("Could not get username");
         }
     });
+    return 'person not found';
 }
 
 //indianred -> mediumvioletred
@@ -171,4 +171,36 @@ function submitComment(){
                 console.log(text);
                 showErrorMessage('Kommentar gesendet');
             })});
+}
+
+function submitEmail(){
+
+    let email = document.getElementById('email').value;
+
+    fetch('./api/submitEmail', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({"email":email})
+    }).then(response => {
+        response.text()
+            .then(function (text){
+                console.log(text);
+                showErrorMessage('Email gesendet');
+            })});
+}
+
+function logout(){
+    fetch('/api/logout', {
+        method: 'GET'
+    }).then(response => {
+        if (response.status === 200){
+            console.log("Logged out");
+            location.href = "https://jullen.at";
+        }
+        else {
+            console.log("Error logging out");
+        }
+    });
 }

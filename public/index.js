@@ -35,20 +35,6 @@ function login(){
     initiateSession(user);
 }
 
-function logout(){
-    fetch('/api/logout', {
-        method: 'GET'
-    }).then(response => {
-        if (response.status === 200){
-            console.log("Logged out");
-            location.href = "https://jullen.at";
-        }
-        else {
-            console.log("Error logging out");
-        }
-    });
-}
-
 async function initiateSession(user){
 
     fetch('./api/login', {
@@ -66,7 +52,7 @@ async function initiateSession(user){
             })
         }
         else {
-            location.reload();
+            location.href='https://jullen.at/userPage';
         }
     })
 }
@@ -77,12 +63,7 @@ function clickUser(){
         method: 'GET'
     }).then(response => {
         if (response.status === 200){
-            if (document.getElementById("userMenu").style.display.toString() === ""){
-                document.getElementById("userMenu").style.display = "block";
-            }
-            else {
-                document.getElementById("userMenu").style.display = "";
-            }
+            location.href='https://jullen.at/userPage';
         }
         else {
             if (document.getElementById("loginPopUp").style.display.toString() === ""){
@@ -119,4 +100,28 @@ function showErrorMessage(text){
     messageBox.innerText = text;
     messageBox.className = "show";
     setTimeout(function(){ messageBox.className = messageBox.className.replace("show", ""); }, 3000);
+}
+
+function changePassword(){
+
+    let password = document.getElementById('newPassword').value;
+
+    fetch('./api/changePassword', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({"password":password})
+    }).then(response => {
+        if (response.status === 200){
+            response.text()
+                .then(function (text){
+                    console.log(text);
+                });
+            location.href='https://jullen.at/userPage';
+        }
+        else {
+            showErrorMessage("Could not change password");
+        }
+    })
 }

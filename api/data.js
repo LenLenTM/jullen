@@ -112,17 +112,42 @@ class Data {
         return res.status(200).send('Comment send');
     }
 
+    submitEmail(req, res){
+        connection.query('update guests set email = ? where username = ?', [req.body.email, req.session.user], function (err, result) {
+            if (err) throw err;
+        });
+
+        return res.status(200).send('Email send');
+    }
+
     getUserConfiguration(req, res){
         connection.query('select * from guests where username = ?', [req.session.user], function (err, result) {
             if (err) throw err;
             if (result.length !== 0){
                 console.log(result[0].comment);
-                return res.status(200).send({confirmation: result[0].commited, comment: result[0].comment});
+                return res.status(200).send({confirmation: result[0].commited, comment: result[0].comment,
+                                            sex: result[0].sex, name: result[0].username.toString(),
+                                            email: result[0].email});
             }
         });
         //return res.status(403).send('Could not find user configuration');
     }
 
+    changePassword(req, res){
+
+        let password = req.body.password;
+        let username = req.session.user;
+
+        const value = username.concat(password);
+        const sha512 = crypto.createHash('sha512');
+        const hash = sha512.update(value).digest('hex');
+
+        connection.query('update guests set passwordHash = ? where username = ?', [hash, req.session.user], function (err, result) {
+            if (err) throw err;
+        });
+
+        return res.status(200).send('Changed password');
+    }
 }
 
 module.exports = new Data();
