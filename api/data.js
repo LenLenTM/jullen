@@ -99,7 +99,7 @@ class Data {
     toggleConfirmation(req, res){
         connection.query('update guests set commited = ? where username = ?', [req.body.confirmation, req.session.user], function (err, result) {
             if (err) throw err;
-        })
+        });
 
         return res.status(200).send('Confirmation updated');
     }
@@ -107,9 +107,20 @@ class Data {
     submitComment(req, res){
         connection.query('update guests set comment = ? where username = ?', [req.body.comment, req.session.user], function (err, result) {
             if (err) throw err;
-        })
+        });
 
         return res.status(200).send('Comment send');
+    }
+
+    getUserConfiguration(req, res){
+        connection.query('select * from guests where username = ?', [req.session.user], function (err, result) {
+            if (err) throw err;
+            if (result.length !== 0){
+                console.log(result[0].comment);
+                return res.status(200).send({confirmation: result[0].commited, comment: result[0].comment});
+            }
+        });
+        //return res.status(403).send('Could not find user configuration');
     }
 
 }

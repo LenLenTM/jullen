@@ -57,7 +57,15 @@ class RequestController {
             return model.submitComment(req, res);
         }
 
-        return res.status(403).status('Could not submit comment');
+        return res.status(403).send('Could not submit comment');
+    }
+
+    async getUserConfiguration(req, res){
+        if (req.session.authenticate === true){
+            return model.getUserConfiguration(req, res);
+        }
+
+        return res.status(403).send('Could not fetch user configuration');
     }
 }
 

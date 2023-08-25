@@ -11,5 +11,6 @@ routes.post('/submitComment', requestController.submitComment);
 routes.get('/verifyUser', requestController.verifyUser);
 routes.get('/logout', requestController.logout);
 routes.get('/getUsername', requestController.getUsername);
+routes.get('/getUserConfiguration', requestController.getUserConfiguration);
 
 module.exports = routes;

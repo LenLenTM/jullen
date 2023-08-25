@@ -6,6 +6,7 @@ class User {
 }
 
 function loadPage(){
+
     fetch('./api/verifyUser', {
         method: 'GET'
     }).then(response => {
@@ -20,7 +21,30 @@ function loadPage(){
 
     getUsername();
 
+    initializeFields();
+
     //TODO: initialise confirmation colors
+}
+
+function initializeFields(){
+
+    fetch('./api/getUserConfiguration', {
+        method: 'GET'
+    }).then(response => response.json())
+        .then(data => {
+            document.getElementById('comment').value = data.comment;
+
+            if (data.confirmation === 1){
+                let button = document.getElementById('confirmation');
+                button.style.backgroundColor = '#b5dba0';
+                button.color = 'white';
+            }
+            else {
+                let button = document.getElementById('cancellation');
+                button.style.backgroundColor = 'indianred';
+                button.color = 'white';
+            }
+        });
 }
 
 function logout(){
@@ -79,8 +103,6 @@ function getUsername(){
 
 function toggleConfirmation(){
 
-    console.log("confirm");
-
     let button = document.getElementById('confirmation');
 
     if (button.style.backgroundColor !== 'rgb(181, 219, 160)'){
@@ -129,6 +151,7 @@ function toggleDatabaseConfirmation(bool){
             response.text()
                 .then(function (text){
                     console.log(text);
+                    showErrorMessage("Zusage/Absage geschickt");
         })});
 }
 
@@ -146,5 +169,6 @@ function submitComment(){
         response.text()
             .then(function (text){
                 console.log(text);
+                showErrorMessage('Kommentar gesendet');
             })});
 }
