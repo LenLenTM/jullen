@@ -293,7 +293,7 @@ form .input-field:first-child{
     text-align: center;
 }
 
-#names {
+#names, #ablauf {
     font-family: Verdana;
     font-weight: lighter;
     color: #ab97b8;
@@ -447,4 +447,30 @@ footer > p, a{
 #adminButton {
     display: none;
     width: 25%;
+}
+
+#map {
+    group-area: map;
+    width: 80%;
+    height: 10rem;
+}
+
+.lauftext {
+    width: 80%;
+}
+
+@media only screen and (max-width: 650px) {
+
+    #text {
+        width: 75%;
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+    }
+
+    #confirmation, #cancellation {
+        width: 46%;
+        height: 6rem;
+        line-height: 6rem;
+        border-radius: 10px;
+    }
 }

@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const requestController = require('./requestController.js');
 const routes = Router();
+const path = require('path');
 
 routes.post('/login', requestController.login);
 routes.post('/register', requestController.register);
@@ -20,7 +21,7 @@ routes.get('/isAdmin', (req, res) => {
         return res.status(200).send("is admin");
     }
     else {
-        console.log("is not admin (routes");
+        console.log("is not admin routes");
         return res.status(403).send("is not admin");
     }
 });

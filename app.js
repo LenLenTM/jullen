@@ -16,7 +16,7 @@ const PORT = 443;
 const oneDay = 1000 * 60 * 60 * 24;
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: 'sa876SS22/sasa', //process.env.SESSION_SECRET,
     saveUninitialized: false,
     cookie: {maxAge: oneDay},
     resave: false

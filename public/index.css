@@ -271,3 +271,13 @@ footer > p, a{
 .impressum{
     font-size: 0.5rem;
 }
+
+@media only screen and (max-width: 650px) {
+
+    #text {
+        width: 75%;
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+    }
+
+}

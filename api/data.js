@@ -53,6 +53,16 @@ class Data {
         connection.query('SELECT * FROM guests WHERE passwordHash=?', [hash], async function (err, result) {
             if (err) throw err;
             if (result.length === 0) {
+                connection.query("select * from guests where username = ?", [user], async function (err2, result2) {
+                    if (err2) throw err2;
+                    if (result2.length !== 0){
+                        const failedAttempts = result2[0].failedAttempts++;
+                        const currentTimestamp = new Date().toISOString();
+                        connection.query('update guests set failedAttempts = ?, lastLoginAttempt = ? where username = ?', [failedAttempts, currentTimestamp, user], function (err, result) {
+                            if (err) throw err;
+                        });
+                    }
+                })
                 return res.status(403).send("Bad credentials");
             } else {
                 req.session.authenticate = true;
@@ -60,7 +70,10 @@ class Data {
                 if (result[0].admin === 1){
                     req.session.superuser = true;
                 }
-
+                const currentTimestamp = new Date().toISOString();
+                connection.query('update guests set failedAttempts = 0, lastLoginAttempt = ? where username = ?', [currentTimestamp, user], function (err, result) {
+                    if (err) throw err;
+                });
                 return res.status(200).send("Login okay");
             }
         });
@@ -149,6 +162,40 @@ class Data {
             }
             //return res.status(412).send('Error loading user data');
         });
+    }
+
+    bruteforceAttackProtection(username, res){
+
+        connection.query('select * from guests where username = ?', [username], async function (err, result){
+            if (err) throw err;
+            if (result.length !== 0){
+                const saveDuration = 600000; // 10 minutes
+                // TODO: implement fields in database "lastLoginAttempt" & "failedAttempts"
+                const lastLogin = result[0].lastLoginAttempt;
+                let failedAttempts = result[0].failedAttempts;
+                const currentTimestamp = new Date().toISOString();
+                const difference = (new Date(currentTimestamp) - new Date(lastLogin));
+
+                // if time since last login attempt is longer than 10 minutes subtract (passed times / 10 minutes) from failed login attempts
+                if (difference > saveDuration && failedAttempts > 0){
+                    const subtrahend = Math.floor(difference / saveDuration);
+                    failedAttempts -= subtrahend;
+
+                    if (failedAttempts < 0) failedAttempts = 0;
+
+                    connection.query('update guests set failedAttempts = ? where username = ?', [failedAttempts, username], function (err, result) {
+                        if (err) throw err;
+                    });
+                }
+
+                if (failedAttempts >= 5 && difference < saveDuration){
+                    return res.status(403);
+                }
+                else {
+                    return res.status(200);
+                }
+            }
+        })
     }
 }
 
