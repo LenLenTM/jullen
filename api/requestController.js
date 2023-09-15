@@ -16,9 +16,15 @@ class RequestController {
         let password = req.body.password;
         let username = req.body.username;
 
-        if (model.bruteforceAttackProtection(username, res).res.status !== 200){
+        await model.bruteforceAttackProtection(username, res);
+
+        if (res.status !== 200){
             return res.status(403).send("Too many login attempts. Try again later.");
         }
+
+        /*if (model.bruteforceAttackProtection(username, res).res.status !== 200){
+            return res.status(403).send("Too many login attempts. Try again later.");
+        }*/
 
         if (password.toString().length > 20){
             return res.status(403).send("Password too long");
